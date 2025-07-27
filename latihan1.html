@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Score Counter</title>
+
+    <style>
+      .score-row {
+        display: flex;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Pada latihan ini, Pak Sandhika Galih menantang untuk membuat sebuah score counter -->
+    <!-- Jika dipencet tombol +, score tambah 1 -->
+    <!-- Jika dipencet tombol -, score kurang 1 -->
+    <!-- Jika pencet tombol reset, score mulai dari 0 -->
+
+    <!-- Langkah 1: Kita buat sebuah div yang akan dijadikan DOM Manipulation -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      // Langkah 2: Kita buat React Root
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container);
+
+      // Langkah 3: Buat judul atau headers
+      const Judul = () => {
+        return <h1>Penghitung Score</h1>;
+      };
+
+      //   Langkah 4: Buat sebuah Score Counter
+      const ScoreCounter = () => {
+        // Langkah 5: Buat sebuah Hook dengan useState. score dimulai dari 0, dan akan memiliki fungsi setScore
+        const [score, setScore] = React.useState(0);
+
+        // Langkah 6: Buat fungsi plusScore
+        function plusScore() {
+          setScore(score + 1);
+        }
+
+        // Langkah 7: Buat sebuah fungsi untuk mengurangi score
+        function minusScore() {
+          setScore(score - 1);
+        }
+
+        // Langkah 8: Buat sebuah fungsi untuk reset skor (logika: untuk dapet skor 0, tinggal kurangin skor dengan dirinya sendiri)
+        function resetScore() {
+          setScore(score - score);
+        }
+
+        // Langkah 9: Panggil masing masing fungsinya
+        return (
+          <div>
+            <div className="score-row">
+              <button onClick={minusScore}>-</button>
+              <h3>{score}</h3>
+              <button onClick={plusScore}>+</button>
+            </div>
+            <button onClick={resetScore}>Reset</button>
+          </div>
+        );
+      };
+
+      //   Langkah 10: Buat komponen Page
+      const Page = () => {
+        return (
+          <>
+            <Judul />
+            <ScoreCounter />
+          </>
+        );
+      };
+
+      //   Langkah 11: Render komponen Page yang mencakup semua komponen
+      root.render(<Page />);
+    </script>
+  </body>
+</html>

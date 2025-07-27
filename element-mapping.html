@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Komponen Dinamis</title>
+  </head>
+  <body>
+    <!-- Pada halaman ini, saya akan membuat komponen dinamis dengan memanfaatkan props pada component -->
+    <!-- // Rules React:
+        // 1. Harus dibungkus sama div atau tag kosong kalo ada banyak elemen
+        // 2. Tag harus ditutup
+        // 3. Pake camelCase buat atribut tag -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container);
+
+      //   Menggunakan Arrow Function
+      const Header = (props) => {
+        // Kalo mau pake props, pake tanda kurung kurawal / curly braces {} lalu isinya akan menjadi namaProps.Atribut
+        return <h1>Hello World! My name is {props.author}</h1>;
+      };
+
+      //   Ini belajar buat Props Refactor
+
+      //   Perlu destructuring
+      const Text = ({ text }) => {
+        // Ternary Operator itu basically if else yang dijadiin satu baris.
+        // {apakah variabel true ? nilai yang ditampilkan jika true : nilai yang ditampilkan jika false}
+
+        return <p>Hari ini, saya akan pergi ke {text ? text : "Jakarta"}</p>;
+      };
+
+      const HomePage = () => {
+        // Nanti Atributnya diisi pake suatu value supaya nanti bisa nongol di Komponen nya
+        return (
+          <>
+            <Header author="Prima"></Header>
+            <Header author="Yudhistira"></Header>
+
+            <Text></Text>
+
+            <Text text="Bogor"></Text>
+          </>
+          //   Pastikan nama atributnya sama kayak parameter yang telah
+          // di Destructure di parameter komponennya
+        );
+      };
+
+      root.render(<HomePage />);
+    </script>
+  </body>
+</html>

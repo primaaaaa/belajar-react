@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React State and Hooks</title>
+  </head>
+  <body>
+    <!-- State adalah sebuah kondisi di mana suatu elemen bisa saja berubah -->
+    <!-- Hooks adalah serangkaian function buat nambahin logic pada komponen kita -->
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const container = document.getElementById("root");
+      const root = ReactDOM.createRoot(container);
+
+      //   Contoh Hooks setState()
+      // setState() akan me-return nilai berupa array. Elemen pertama pada array adalah nilai statenya, elemen kedua merupakan function buat ubah nilainya.
+
+      //   React.useState(0) berarti nilai awalnya adalah 0
+
+      const Header = () => {
+        return <h1>Halaman Penghitung Like, Dislike, dan Ratio</h1>;
+      };
+
+      const Button = () => {
+        const [likes, setLikes] = React.useState(0);
+        const [dislike, setDislike] = React.useState(0);
+        let ratio;
+
+        const handleLikes = () => {
+          setLikes(likes + 1);
+        };
+
+        const handleDislikes = () => {
+          setDislike(dislike + 1);
+        };
+
+        if (likes + dislike === 0) {
+          ratio = 0;
+        } else {
+          ratio = (likes / (likes + dislike)) * 100;
+        }
+
+        return (
+          <>
+            <button onClick={handleLikes}>Like ({likes})</button>
+            <button onClick={handleDislikes}>Dislike ({dislike})</button>
+            <p>Ratio Like: {ratio}% </p>
+          </>
+        );
+      };
+
+      const HomePage = () => {
+        // Dalam membuat sebuah hook, hooknya harus dipanggil di dalam komponen atau fungsi
+        // yang menjalankan hooks tersebut.
+
+        // Misalnya, HomePage akan menampilkan likes dan dislike. Berarti hooks nya harus di dalam komponen HomePage nya
+
+        return (
+          <>
+            <Header />
+            <Button type="like"></Button>
+          </>
+        );
+      };
+      root.render(<HomePage />);
+    </script>
+  </body>
+</html>
